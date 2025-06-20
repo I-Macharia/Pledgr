@@ -1,5 +1,5 @@
 # Team-7-NightOfCode-
-Move-to-earn token app
+Creator staking for fan perks
 
 ## Description 
-Simple mobile app that tracks steps via phone + issues points convertible to tokens.
+Creator profile + staking module + fan leaderboard + basic token perks page (merch, shoutouts).
