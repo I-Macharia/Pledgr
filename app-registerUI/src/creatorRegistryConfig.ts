@@ -44,3 +44,17 @@ export const CREATOR_REGISTRY_ABI = [
 
 // Replace with your deployed contract address
 export const CREATOR_REGISTRY_ADDRESS = "0xYourDeployedContractAddress";
+
+// Network configuration
+export const SUPPORTED_NETWORKS = {
+  43113: {
+    name: "Avalanche Fuji Testnet",
+    rpcUrl: "https://api.avax-test.network/ext/bc/C/rpc",
+    blockExplorer: "https://testnet.snowtrace.io",
+  },
+  43114: {
+    name: "Avalanche Mainnet",
+    rpcUrl: "https://api.avax.network/ext/bc/C/rpc",
+    blockExplorer: "https://snowtrace.io",
+  },
+}
