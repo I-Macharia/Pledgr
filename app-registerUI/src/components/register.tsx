@@ -63,7 +63,8 @@ const Register: React.FC = () => {
         const signer = await provider.getSigner()
 
         // Check if contract address is valid
-        if (CREATOR_REGISTRY_ADDRESS === "0xYourDeployedContractAddress") {
+        const PLACEHOLDER_ADDRESS: string = "0xYourDeployedContractAddress";
+        if (CREATOR_REGISTRY_ADDRESS === PLACEHOLDER_ADDRESS) {
           throw new Error(
             "Contract not deployed. Please deploy the CreatorRegistry contract first and update the address in creatorRegistryConfig.ts",
           )
@@ -75,7 +76,10 @@ const Register: React.FC = () => {
 
         // Estimate gas to check if the contract exists and function is valid
         try {
-          await contract.registerCreator.estimateGas(form.username, form.bio, form.avatar)
+          const gasPrice = await provider.send("eth_gasPrice", []);
+          await contract.registerCreator(form.username, form.bio, form.avatar, {
+            gasPrice,
+          });
         } catch (gasError: any) {
           if (gasError.code === "CALL_EXCEPTION") {
             throw new Error(

@@ -34,7 +34,7 @@ const CreatorsList: React.FC = () => {
 
         if (
           !CREATOR_REGISTRY_ADDRESS ||
-          CREATOR_REGISTRY_ADDRESS === "0xYourDeployedContractAddress"
+          CREATOR_REGISTRY_ADDRESS === ("0xYourDeployedContractAddress" as string)
         ) {
           throw new Error("Contract not deployed. Please deploy the CreatorRegistry contract first.")
         }

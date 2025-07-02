@@ -1,49 +1,179 @@
 // Minimal ABI for CreatorRegistry
 export const CREATOR_REGISTRY_ABI = [
   {
+    "type": "function",
+    "name": "creatorList",
     "inputs": [
-      { "internalType": "string", "name": "_name", "type": "string" },
-      { "internalType": "string", "name": "_bio", "type": "string" },
-      { "internalType": "string", "name": "_avatar", "type": "string" }
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
     ],
-    "name": "registerCreator",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "string", "name": "_name", "type": "string" },
-      { "internalType": "string", "name": "_bio", "type": "string" },
-      { "internalType": "string", "name": "_avatar", "type": "string" }
-    ],
-    "name": "updateProfile",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "", "type": "address" }
-    ],
-    "name": "creators",
     "outputs": [
-      { "internalType": "address", "name": "creator", "type": "address" },
-      { "internalType": "string", "name": "name", "type": "string" },
-      { "internalType": "string", "name": "bio", "type": "string" },
-      { "internalType": "string", "name": "avatar", "type": "string" },
-      { "internalType": "bool", "name": "isActive", "type": "bool" },
-      { "internalType": "uint256", "name": "totalStaked", "type": "uint256" },
-      { "internalType": "uint256", "name": "fanCount", "type": "uint256" },
-      { "internalType": "uint256", "name": "createdAt", "type": "uint256" }
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      }
     ],
-    "stateMutability": "view",
-    "type": "function"
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "creators",
+    "inputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "creator",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "internalType": "string"
+      },
+      {
+        "name": "bio",
+        "type": "string",
+        "internalType": "string"
+      },
+      {
+        "name": "avatar",
+        "type": "string",
+        "internalType": "string"
+      },
+      {
+        "name": "isActive",
+        "type": "bool",
+        "internalType": "bool"
+      },
+      {
+        "name": "totalStaked",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "fanCount",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "createdAt",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "isCreator",
+    "inputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool",
+        "internalType": "bool"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "registerCreator",
+    "inputs": [
+      {
+        "name": "_name",
+        "type": "string",
+        "internalType": "string"
+      },
+      {
+        "name": "_bio",
+        "type": "string",
+        "internalType": "string"
+      },
+      {
+        "name": "_avatar",
+        "type": "string",
+        "internalType": "string"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "updateProfile",
+    "inputs": [
+      {
+        "name": "_name",
+        "type": "string",
+        "internalType": "string"
+      },
+      {
+        "name": "_bio",
+        "type": "string",
+        "internalType": "string"
+      },
+      {
+        "name": "_avatar",
+        "type": "string",
+        "internalType": "string"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "event",
+    "name": "CreatorRegistered",
+    "inputs": [
+      {
+        "name": "creator",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "indexed": false,
+        "internalType": "string"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "CreatorUpdated",
+    "inputs": [
+      {
+        "name": "creator",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
   }
 ];
 
 // Replace with your deployed contract address
-export const CREATOR_REGISTRY_ADDRESS = "0xYourDeployedContractAddress";
+export const CREATOR_REGISTRY_ADDRESS = "0xD41DAE3e2E81B041076FAC92407e3F51e02DF9ee";
 
 // Network configuration
 export const SUPPORTED_NETWORKS = {
