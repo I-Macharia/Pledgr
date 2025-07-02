@@ -1,0 +1,49 @@
+.wallet-connection-container {
+  max-width: 400px;
+  margin: 40px auto 0 auto;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 24px;
+}
+
+.wallet-login-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wallet-login-button {
+  background-color: #4f46e5;
+  color: #fff;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.wallet-login-button:hover {
+  background-color: #3730a3;
+}
+
+.wallet-info-section {
+  margin-top: 10px;
+}
+
+.wallet-address {
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.wallet-signature {
+  font-size: 0.95rem;
+  word-break: break-all;
+}
+
+.wallet-error-message {
+  color: #dc2626;
+  margin-top: 16px;
+  text-align: center;
+}
