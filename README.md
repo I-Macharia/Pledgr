@@ -95,6 +95,11 @@ anvil
    ```
    Replace `<PRIVATE_KEY>` with one from Anvil output.
 
+
+Deployer: 0x1255bB52BbcfE1bD8B7Bcd9F61b4327aef54045e
+Deployed to: 0xD41DAE3e2E81B041076FAC92407e3F51e02DF9ee
+Transaction hash: 0x812b0d08eb6837ae611b6a806060f3124e39ee767a3fe0f2f5c1c5ee06fb7cac
+
 ## Interacting with Contracts
 
 ### Using Cast (CLI)
