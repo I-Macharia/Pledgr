@@ -1,0 +1,167 @@
+/* .register-bg {
+  max-height: 100vh;
+  background: #f7fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-width: 500px; ;
+} */
+
+
+/* .register-container {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  padding: 32px 24px;
+  width: 100%;
+  max-width: 400px;
+  max-height: 90vh;
+  } */
+
+  .register-bg {
+    background: #f7fafc;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    min-width: 500px;
+    max-width: 90%;
+    width: auto;
+    max-height: 100vh;
+  }
+  
+  .register-container {
+    background: #f7fafc;
+    padding: 40px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 500px;
+    box-sizing: border-box;
+  }
+  .register-back-btn {
+    position: absolute;
+    top: 55px;
+    left: 30px;
+    background: none;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 6px;
+    background: #2563eb;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.register-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0;
+  margin-top: 0;
+  color: #22223b;
+}
+
+.register-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.register-label {
+  font-size: 1rem;
+  color: #4b5563;
+  margin-bottom: 2px;
+}
+
+.register-input {
+  /* padding: 10px 12px; */
+  padding:  2% 3% ;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+  background: #f9fafb;
+}
+
+.register-input:focus {
+  border-color: #2563eb;
+  background: #fff;
+}
+
+.register-required {
+  color: #ef4444;
+  margin-left: 2px;
+}
+
+.register-error {
+  color: #ef4444;
+  font-size: 0.85rem;
+  margin-top: 2px;
+}
+
+.register-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.register-clear-btn {
+  background: #e5e7eb;
+  color: #374151;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.register-clear-btn:hover {
+  background: #d1d5db;
+}
+
+.register-submit-btn {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.register-submit-btn:disabled {
+  background: #a5b4fc;
+  cursor: not-allowed;
+}
+
+.register-submit-btn:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+.register-radio-group {
+  display: flex;
+  gap: 20px;
+  margin-top: 4px;
+}
+
+.register-radio-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1rem;
+  color: #374151;
+}

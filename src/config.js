@@ -1,0 +1,2 @@
+// src/config.js
+export const CREATOR_REGISTRY_ADDRESS = "0xf37DaE208097a2fF6a69C1D6302EB112457B41dc";
