@@ -173,7 +173,7 @@ export const CREATOR_REGISTRY_ABI = [
 ];
 
 // Replace with your deployed contract address
-export const CREATOR_REGISTRY_ADDRESS = "0xD41DAE3e2E81B041076FAC92407e3F51e02DF9ee";
+export const CREATOR_REGISTRY_ADDRESS = "0x74e384f2aF3dD6B570F2E2AafA00E8dE24B6b2be";
 
 // Network configuration
 export const SUPPORTED_NETWORKS = {
@@ -188,3 +188,4 @@ export const SUPPORTED_NETWORKS = {
     blockExplorer: "https://snowtrace.io",
   },
 }
+
