@@ -14,3 +14,16 @@ type CreatorUpdated @entity(immutable: true) {
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
+
+type Creator @entity {
+  id: ID!
+  name: String!
+  bio: String
+  avatar: String
+  fanCount: BigInt
+  totalStaked: BigInt
+}
+
+type Query {
+  creators(first: Int, skip: Int, orderBy: Creator_orderBy, orderDirection: OrderDirection, where: Creator_filter): [Creator!]!
+}

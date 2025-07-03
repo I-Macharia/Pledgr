@@ -3,7 +3,7 @@ import { ethers } from "ethers";
 import { CREATOR_REGISTRY_ABI, CREATOR_REGISTRY_ADDRESS } from "../creatorRegistryConfig";
 import "../styles/creatorsList.css";
 
-const GRAPHQL_ENDPOINT = import.meta.env.VITE_GRAPHQL_ENDPOINT || "https://api.thegraph.com/subgraphs/name/YOUR_SUBGRAPH_NAME";
+// const GRAPHQL_ENDPOINT = import.meta.env.VITE_GRAPHQL_ENDPOINT || "https://api.thegraph.com/subgraphs/name/YOUR_SUBGRAPH_NAME";
 const INFURA_RPC = import.meta.env.VITE_INFURA_RPC || "https://avalanche-fuji.infura.io/v3/YOUR_INFURA_PROJECT_ID";
 
 const CreatorsList: React.FC = () => {
@@ -12,32 +12,32 @@ const CreatorsList: React.FC = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const fetchFromGraph = async () => {
-      try {
-        const query = `{
-          creators(first: 1000) {
-            id
-            name
-            bio
-            avatar
-            fanCount
-            totalStaked
-          }
-        }`;
-        const res = await fetch(GRAPHQL_ENDPOINT, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ query }),
-        });
-        const { data } = await res.json();
-        if (data && data.creators) {
-          return data.creators;
-        }
-        throw new Error("No data from The Graph");
-      } catch (err) {
-        throw err;
-      }
-    };
+    // const fetchFromGraph = async () => {
+    //   try {
+    //     const query = `{
+    //       creators(first: 1000) {
+    //         id
+    //         name
+    //         bio
+    //         avatar
+    //         fanCount
+    //         totalStaked
+    //       }
+    //     }`;
+    //     const res = await fetch(GRAPHQL_ENDPOINT, {
+    //       method: "POST",
+    //       headers: { "Content-Type": "application/json" },
+    //       body: JSON.stringify({ query }),
+    //     });
+    //     const { data } = await res.json();
+    //     if (data && data.creators) {
+    //       return data.creators;
+    //     }
+    //     throw new Error("No data from The Graph");
+    //   } catch (err) {
+    //     throw err;
+    //   }
+    // };
 
     const fetchFromContract = async (provider: any) => {
       const contract = new ethers.Contract(
@@ -52,32 +52,31 @@ const CreatorsList: React.FC = () => {
       for (let i = 0; i < creatorCount; i++) {
         addresses.push(await contract.creatorList(i));
       }
-      const details = await Promise.all(
-        addresses.map(async (addr) => {
-          const c = await contract.creators(addr);
-          return { ...c };
-        })
-      );
-      return details;
+      return await Promise.all(
+              addresses.map(async (addr) => {
+                const c = await contract.creators(addr);
+                return { ...c };
+              })
+            );
     };
 
     const fetchCreators = async () => {
       setLoading(true);
       setError("");
       try {
-        // 1. Try The Graph
-        if (GRAPHQL_ENDPOINT && !GRAPHQL_ENDPOINT.includes("YOUR_SUBGRAPH_NAME")) {
-          try {
-            const graphCreators = await fetchFromGraph();
-            if (graphCreators && graphCreators.length > 0) {
-              setCreators(graphCreators);
-              setLoading(false);
-              return;
-            }
-          } catch (err) {
-            console.warn("The Graph fetch failed, falling back to RPC.", err);
-          }
-        }
+        // // 1. Try The Graph
+        // if (GRAPHQL_ENDPOINT && !GRAPHQL_ENDPOINT.includes("YOUR_SUBGRAPH_NAME")) {
+        //   try {
+        //     const graphCreators = await fetchFromGraph();
+        //     if (graphCreators && graphCreators.length > 0) {
+        //       setCreators(graphCreators);
+        //       setLoading(false);
+        //       return;
+        //     }
+        //   } catch (err) {
+        //     console.warn("The Graph fetch failed.", err);
+        //   }
+        // }
         // 2. Try Infura
         if (INFURA_RPC && !INFURA_RPC.includes("YOUR_INFURA_PROJECT_ID")) {
           try {
@@ -100,6 +99,7 @@ const CreatorsList: React.FC = () => {
         } else {
           throw new Error("No wallet or RPC provider found");
         }
+        setCreators([]); // If The Graph fails, show empty
       } catch (err: any) {
         setError(err.message || "Failed to fetch creators");
       }
