@@ -1,0 +1,16 @@
+type CreatorRegistered @entity(immutable: true) {
+  id: Bytes!
+  creator: Bytes! # address
+  name: String! # string
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type CreatorUpdated @entity(immutable: true) {
+  id: Bytes!
+  creator: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
