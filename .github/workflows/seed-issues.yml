@@ -11,6 +11,6 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Create Issues from YAML
-        uses: Avalanche-Team1-Africa/create-issues-action@main
+        uses: Avalanche-Team1-Africa/create-issue-action@main
         with:
           filename: .github/issues.yml
