@@ -1,7 +1,7 @@
 name: Seed GitHub Issues
 
 on:
-  workflow_dispatch:  # You can trigger it manually from GitHub Actions
+  workflow_dispatch:
 
 jobs:
   seed:
@@ -11,6 +11,6 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Create Issues from YAML
-        uses: dacbd/create-issues-action@v3
+        uses: Avalanche-Team1-Africa/create-issues-action@main
         with:
           filename: .github/issues.yml
