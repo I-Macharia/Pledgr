@@ -1,0 +1,16 @@
+name: Seed GitHub Issues
+
+on:
+  workflow_dispatch:  # You can trigger it manually from GitHub Actions
+
+jobs:
+  seed:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Create Issues from YAML
+        uses: dacbd/create-issues-action@v3
+        with:
+          filename: .github/issues.yml
