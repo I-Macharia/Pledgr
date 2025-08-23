@@ -1,175 +1,277 @@
-# Avalanche Adamur NOC Smart Contracts
+# 🚀 Pledgr - Decentralized Creator Staking Platform
 
-This repository contains smart contracts and scripts for the Avalanche Adamur NOC project, built using [Foundry](https://book.getfoundry.sh/)—a blazing fast, portable, and modular toolkit for Ethereum application development written in Rust.
+> Empowering creators through community-driven staking and exclusive perks on Avalanche
 
----
+[![Solidity](https://img.shields.io/badge/Solidity-%5E0.8.19-363636?style=flat-square&logo=solidity)](https://soliditylang.org/)
+[![Avalanche](https://img.shields.io/badge/Avalanche-E84142?style=flat-square&logo=avalanche&logoColor=white)](https://www.avax.network/)
+[![Foundry](https://img.shields.io/badge/Foundry-gray?style=flat-square&logo=ethereum&logoColor=white)](https://getfoundry.sh/)
+[![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-43853D?style=flat-square&logo=node.js&logoColor=white)](https://nodejs.org/)
 
-## Tools & Languages Used
+## 🎯 What is Pledgr?
 
-- **Smart Contracts:** Solidity
-- **Development Framework:** Foundry (forge, cast, anvil)
-- **Front End:** React, Node.js, Python
-- **Backend:** Node.js, Python
-- **Subgraph/Indexing:** The Graph
-- **Libraries:** OpenZeppelin Contracts, forge-std
-- **Other:** Ethers.js, Hardhat (optional), Infura (RPC provider), AI (for some modules)
-- **Testing:** Foundry, Mocha/Chai (optional for JS integration)
-- **Deployment:** Foundry scripts, Anvil (local blockchain)
+Pledgr revolutionizes creator monetization by enabling fans to stake tokens directly to their favorite creators. Built on Avalanche's fast and low-cost network, creators can offer exclusive perks, build stronger communities, and generate sustainable income through decentralized staking mechanisms.
 
----
+### 🔥 Key Features
 
-## Team Information
+- **Creator Registry**: On-chain creator profiles with metadata and analytics
+- **Community Staking**: Fans stake AVAX to support creators and unlock exclusive content
+- **Dynamic Perks System**: Tier-based rewards and exclusive access for top stakers
+- **Real-time Analytics**: Track staking performance and community growth
+- **Cross-platform Integration**: Seamless Web3 wallet integration
 
-| First Name | Last Name  | What are you building?           | Team Name | Team Lead      | Stack (Front end, Backend, Smart Contracts) | Email                        | Personal Github   | Project Github Link                |
-|------------|------------|----------------------------------|-----------|---------------|---------------------------------------------|------------------------------|-------------------|-------------------------------------|
-| Simon      | Muchemi    | Creator staking application      | Pledgr    |               | Python, Node.JS                            | Muchemi.developer@gmail.com  | SymonMuchemi      | https://github.com/Pledger-DAO      |
-| Shramee    | Srivastav  | Creator staking application      | Pledgr    |               | Arch/Crypto math                           | shramee.srivastav@gmail.com  | shramee           | https://github.com/Pledger-DAO      |
-| Mozart     | Kandie     | Creator staking application      | Pledger   |               | React, Node                                | MozzartKandie@gmail.com      | legacymoz         | https://github.com/Pledger-DAO      |
-| Jim        | Leston     | Creator staking application      | Pledgr    | Team Lead      | node/web/mobile app                        | jimlestonosoi42@gmail.com    | lestonEth         | https://github.com/Pledger-DAO      |
-| Tonny      | Murithi    | Creator staking application      | Pledger   |               | Solidity, AI                               | tonnymurithi.tg@gmail.com    | metonniex         | https://github.com/Pledger-DAO      |
-| Cynthia    | Wanjiru    | Creator staking application      | Pledger   |               | Full-stack                                 | cynthiamuemi@gmail.com       | Preciousmuemi      | https://github.com/Pledger-DAO      |
-| Ian        | Macharia   | Creator staking application      | Pledger   |               | Py, Solidity, Node JS                      | Macharia.gichoya@gmail.com   | I-Macharia         | https://github.com/Pledger-DAO      |
+## 🛠️ Tech Stack
 
+**Smart Contracts**
+- Solidity ^0.8.19
+- Foundry (Development & Testing)
+- OpenZeppelin Contracts
 
----
+**Frontend**
+- React 18 with TypeScript
+- Vite (Build Tool)
+- Ethers.js (Web3 Integration)
+- TailwindCSS (Styling)
 
-## Table of Contents
-- [Overview](#overview)
-- [Contracts](#contracts)
-- [Project Structure](#project-structure)
-- [Getting Started](#getting-started)
-- [Development](#development)
-- [Testing](#testing)
-- [Deployment](#deployment)
-- [Interacting with Contracts](#interacting-with-contracts)
-- [Resources](#resources)
+**Backend & Infrastructure**
+- Node.js
+- The Graph (Indexing)
+- Avalanche C-Chain
+- Python (Analytics)
 
-## Overview
+## 📋 Prerequisites
 
-This codebase provides a modular registry for creators, staking, and perks on Avalanche, with extensible smart contracts and a robust testing/deployment pipeline using Foundry.
+Before you begin, ensure you have:
 
-## Contracts
+- [Node.js](https://nodejs.org/) (v16+ recommended)
+- [pnpm](https://pnpm.io/) package manager
+- [Foundry](https://book.getfoundry.sh/getting-started/installation) toolkit
+- [Core Wallet](https://core.app/) or MetaMask with Avalanche network
 
-- **CreatorRegistry**: Register, update, and manage creator profiles on-chain. Each creator has metadata (name, bio, avatar), activity status, and stats (total staked, fan count, creation time).
-- **Staking**: (WIP) Staking logic for fans to support creators.
-- **Perks**: (WIP) Perks and rewards for fans and creators.
+## 🚀 Quick Start
 
-Contracts are located in `contracts/`.
+### 1. Clone the Repository
 
-## Project Structure
-
-```
-contracts/
-  creator.sol         # CreatorRegistry contract
-  staking.sol         # Staking contract (WIP)
-  perks.sol           # Perks contract (WIP)
-  CreatorRegistryABI.json # ABI for front-end integration
-script/
-  DeployCreatorRegistry.s.sol # Deployment script for CreatorRegistry
-  ...
-test/
-  Creator.t.sol       # Foundry tests for CreatorRegistry
-lib/
-  openzeppelin-contracts/     # OpenZeppelin library for security and standards
-  forge-std/                  # Foundry standard library
+```bash
+git clone https://github.com/Pledger-DAO/avalanche-adamur-noc.git
+cd avalanche-adamur-noc
 ```
 
-## Getting Started
+### 2. Install Dependencies
 
-### Prerequisites
-
-- [Foundry](https://book.getfoundry.sh/getting-started/installation) (forge, cast, anvil)
-- Node.js (for front-end or integration scripts)
-
-### Install Dependencies
-
-```sh
+**Smart Contracts:**
+```bash
 forge install
 ```
 
-## Development
+**Frontend:**
+```bash
+cd app-registerUI
+pnpm install
+```
 
-### Build Contracts
+### 3. Set Up Environment
 
-```sh
+Create `.env` files in both root and frontend directories:
+
+**Root `.env`:**
+```bash
+PRIVATE_KEY=your_private_key_here
+AVALANCHE_RPC_URL=https://api.avax-test.network/ext/bc/C/rpc
+ETHERSCAN_API_KEY=your_snowtrace_api_key
+```
+
+**Frontend `.env`:**
+```bash
+VITE_CONTRACT_ADDRESS=0x74e384f2aF3dD6B570F2E2AafA00E8dE24B6b2be
+VITE_AVALANCHE_RPC=https://api.avax-test.network/ext/bc/C/rpc
+```
+
+### 4. Build & Test Smart Contracts
+
+```bash
+# Compile contracts
 forge build
-```
 
-### Format Code
-
-```sh
-forge fmt
-```
-
-## Testing
-
-### Run All Tests
-
-```sh
+# Run tests
 forge test
+
+# Deploy locally
+anvil # In separate terminal
+forge script script/DeployCreatorRegistry.s.sol --rpc-url http://localhost:8545 --broadcast --private-key $PRIVATE_KEY
 ```
 
-### Gas Snapshots
+### 5. Start Frontend
 
-```sh
-forge snapshot
+```bash
+cd app-registerUI
+pnpm dev
 ```
 
-## Local Blockchain
+Visit `http://localhost:5173` to see the app in action! 🎉
 
-### Start Local Node
+## 🔗 Deployed Contracts
 
-```sh
+### Fuji Testnet
+
+| Contract | Address | Verified |
+|----------|---------|----------|
+| CreatorRegistry | [`0x74e384f2aF3dD6B570F2E2AafA00E8dE24B6b2be`](https://testnet.snowtrace.io/address/0x74e384f2aF3dD6B570F2E2AafA00E8dE24B6b2be) | ✅ |
+| Staking | Coming Soon | - |
+| Perks | Coming Soon | - |
+
+**Deployment Transaction**: [`0xc625a77c70031507bd9eb05ba197d36f9ed161d80da76d2345bbb0b57aa032a6`](https://testnet.snowtrace.io/tx/0xc625a77c70031507bd9eb05ba197d36f9ed161d80da76d2345bbb0b57aa032a6)
+
+## 🔌 Wallet Setup
+
+### Adding Avalanche Fuji Testnet to Core Wallet
+
+1. Open [Core Wallet](https://core.app/)
+2. Click "Add Network" 
+3. Select "Avalanche Fuji Testnet" or add manually:
+
+```
+Network Name: Avalanche Fuji Testnet
+RPC URL: https://api.avax-test.network/ext/bc/C/rpc
+Chain ID: 43113
+Symbol: AVAX
+Explorer: https://testnet.snowtrace.io/
+```
+
+4. Get testnet AVAX from the [Avalanche Faucet](https://faucet.avax.network/)
+
+## 🎮 Usage Examples
+
+### Register as a Creator
+
+```solidity
+// Using cast CLI
+cast send $CONTRACT_ADDRESS "registerCreator(string,string,string)" \
+  "Alice Creator" \
+  "Digital artist creating NFT collections" \
+  "https://ipfs.io/ipfs/QmYour...Avatar" \
+  --private-key $PRIVATE_KEY \
+  --rpc-url https://api.avax-test.network/ext/bc/C/rpc
+```
+
+### Query Creator Profile
+
+```javascript
+// Using ethers.js
+const creator = await creatorRegistry.creators(creatorAddress);
+console.log(`Name: ${creator.name}, Total Staked: ${creator.totalStaked}`);
+```
+
+## 📁 Project Structure
+
+```
+📦 Pledgr
+├── 📂 contracts/              # Smart contracts
+│   ├── creator.sol           # Creator registry
+│   ├── staking.sol          # Staking logic (WIP)
+│   └── perks.sol            # Perks system (WIP)
+├── 📂 script/               # Deployment scripts
+├── 📂 test/                 # Foundry tests
+├── 📂 app-registerUI/       # React frontend
+│   ├── 📂 src/
+│   │   ├── 📂 components/   # UI components
+│   │   ├── 📂 pages/        # Page components
+│   │   ├── 📂 services/     # Web3 services
+│   │   └── 📂 utils/        # Helper functions
+├── 📂 lib/                  # Dependencies
+└── 📂 docs/                 # Documentation
+```
+
+## 🧪 Testing
+
+```bash
+# Run all tests with gas reports
+forge test --gas-report
+
+# Test specific contract
+forge test --match-contract CreatorTest
+
+# Test with verbosity
+forge test -vvv
+```
+
+## 🚢 Deployment
+
+### Local Development
+
+```bash
+# Start local blockchain
 anvil
+
+# Deploy to local network
+forge script script/DeployCreatorRegistry.s.sol \
+  --rpc-url http://localhost:8545 \
+  --broadcast \
+  --private-key $PRIVATE_KEY
 ```
 
-## Deployment
+### Fuji Testnet
 
-### Deploy CreatorRegistry Locally
+```bash
+forge script script/DeployCreatorRegistry.s.sol \
+  --rpc-url $AVALANCHE_RPC_URL \
+  --broadcast \
+  --private-key $PRIVATE_KEY \
+  --verify \
+  --etherscan-api-key $ETHERSCAN_API_KEY
+```
 
-1. Start Anvil in a terminal:
-   ```sh
-   anvil
-   ```
-2. Deploy contract using Foundry script:
-   ```sh
-   forge script script/DeployCreatorRegistry.s.sol --rpc-url http://localhost:8545 --broadcast --private-key <PRIVATE_KEY>
-   ```
-   Replace `<PRIVATE_KEY>` with one from Anvil output.
+## 🤝 Contributing
 
-### 🛠 Deployment Details
+We welcome contributions from the community! Please check out our [Contributing Guidelines](contributing.md) before getting started.
 
-- **Deployer:** `0x1255bB52BbcfE1bD8B7Bcd9F61b4327aef54045e`  
-- **Deployed Contract Address:** `0x74e384f2aF3dD6B570F2E2AafA00E8dE24B6b2be`  
-- **Transaction Hash:** [`0xc625a77c70031507bd9eb05ba197d36f9ed161d80da76d2345bbb0b57aa032a6`](https://testnet.snowtrace.io/tx/0xc625a77c70031507bd9eb05ba197d36f9ed161d80da76d2345bbb0b57aa032a6)
+### Quick Contribution Steps
 
-## Interacting with Contracts
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-### Using Cast (CLI)
+## 👥 Team
 
-- Register a creator:
-  ```sh
-  cast send <CONTRACT_ADDRESS> "registerCreator(string,string,string)" "Alice" "My bio" "https://avatar.url" --private-key <PRIVATE_KEY> --rpc-url http://localhost:8545
-  ```
-- Fetch creator profile:
-  ```sh
-  cast call <CONTRACT_ADDRESS> "creators(address)" <YOUR_ADDRESS> --rpc-url http://localhost:8545
-  ```
-- Update profile:
-  ```sh
-  cast send <CONTRACT_ADDRESS> "updateProfile(string,string,string)" "Alice2" "New bio" "https://avatar2.url" --private-key <PRIVATE_KEY> --rpc-url http://localhost:8545
-  ```
+| Name | Role | GitHub | Email |
+|------|------|--------|--------|
+| Jim Leston | Team Lead | [@lestonEth](https://github.com/lestonEth) | jimlestonosoi42@gmail.com |
+| Simon Muchemi | Backend Developer | [@SymonMuchemi](https://github.com/SymonMuchemi) | Muchemi.developer@gmail.com |
+| Shramee Srivastav | Cryptography | [@shramee](https://github.com/shramee) | shramee.srivastav@gmail.com |
+| Mozart Kandie | Frontend Developer | [@legacymoz](https://github.com/legacymoz) | MozzartKandie@gmail.com |
+| Tonny Murithi | Smart Contract Developer | [@metonniex](https://github.com/metonniex) | tonnymurithi.tg@gmail.com |
+| Cynthia Wanjiru | Full-stack Developer | [@Preciousmuemi](https://github.com/Preciousmuemi) | cynthiamuemi@gmail.com |
+| Ian Macharia | Backend Developer | [@I-Macharia](https://github.com/I-Macharia) | Macharia.gichoya@gmail.com |
 
-### Using Node.js (Ethers.js)
+## 📊 Roadmap
 
-See `testCreatorRegistry.js` for example integration scripts.
+- [x] **Phase 1**: Creator Registry & Basic Frontend
+- [ ] **Phase 2**: Staking Mechanism Implementation
+- [ ] **Phase 3**: Dynamic Perks System
+- [ ] **Phase 4**: Mobile App Development
+- [ ] **Phase 5**: Mainnet Launch
+- [ ] **Phase 6**: Creator Analytics Dashboard
 
-## Resources
+## 📚 Resources
 
+- [Avalanche Documentation](https://docs.avax.network/)
 - [Foundry Book](https://book.getfoundry.sh/)
 - [OpenZeppelin Contracts](https://docs.openzeppelin.com/contracts/)
-- [Ethers.js](https://docs.ethers.org/)
+- [React Documentation](https://react.dev/)
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](license.md) file for details.
+
 
 ---
 
-**For more details, see the documentation in the `docs/` folder.**
+<div align="center">
+
+**Built with ❤️ by the Pledgr team for the Avalanche ecosystem**
+
+<!-- [Website](https://pledgr.app) • [Docs](https://docs.pledgr.app)  -->
+</div>
