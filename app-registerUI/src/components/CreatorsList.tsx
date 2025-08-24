@@ -1,3 +1,13 @@
+/**
+ * @file CreatorsList.tsx
+ * @description Displays a list of all registered creators on the platform.
+ * @author Pledgr Team
+ * @created 2025-08-24
+ * @lastModified 2025-08-24
+ * @usage Used as the /creators route in App.tsx.
+ * @exports CreatorsList (React Functional Component)
+ */
+
 import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import { CREATOR_REGISTRY_ABI, CREATOR_REGISTRY_ADDRESS } from "../creatorRegistryConfig";
@@ -6,6 +16,25 @@ import "../styles/creatorsList.css";
 // const GRAPHQL_ENDPOINT = import.meta.env.VITE_GRAPHQL_ENDPOINT || "https://api.thegraph.com/subgraphs/name/YOUR_SUBGRAPH_NAME";
 const INFURA_RPC = import.meta.env.VITE_INFURA_RPC || "https://avalanche-fuji.infura.io/v3/YOUR_INFURA_PROJECT_ID";
 
+/**
+ * React component that displays a list of creators fetched from either a smart contract
+ * (via Infura RPC or browser wallet) or, optionally, from The Graph.
+ *
+ * The component attempts to fetch creator data in the following order:
+ * 1. The Graph (commented out in current code)
+ * 2. Infura RPC provider
+ * 3. Browser wallet (window.ethereum)
+ *
+ * Displays loading, error, and empty states as appropriate.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered list of creators.
+ *
+ * @remarks
+ * - Uses ethers.js for contract interaction.
+ * - Expects contract ABI and address to be available as constants.
+ * - Creator objects should include: id, name, bio, avatar, fanCount, totalStaked.
+ */
 const CreatorsList: React.FC = () => {
   const [creators, setCreators] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);

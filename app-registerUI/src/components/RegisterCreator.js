@@ -2,6 +2,19 @@ import React, { useState } from "react";
 import { ethers } from "ethers";
 import { getContract, isContractAvailable } from "../utils/contract";
 
+/**
+ * RegisterCreator component handles the registration process for a creator.
+ * It manages form submission, error handling, and loading state.
+ * 
+ * Features:
+ * - Connects to Ethereum provider via MetaMask.
+ * - Checks if the smart contract is available.
+ * - Loads the contract and executes registration logic.
+ * - Displays error messages and loading indicator.
+ * 
+ * @component
+ * @returns {JSX.Element} The registration form UI.
+ */
 function RegisterCreator() {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);

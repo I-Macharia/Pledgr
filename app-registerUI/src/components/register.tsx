@@ -6,6 +6,24 @@ import { ethers } from "ethers"
 import { CREATOR_REGISTRY_ABI, CREATOR_REGISTRY_ADDRESS } from "../creatorRegistryConfig"
 import "../styles/register.css"
 
+/**
+ * `Register` is a React functional component that renders the registration form for the Pledgr platform.
+ * 
+ * - Allows users to register as either a "creator" or a "fan".
+ * - Handles form state, validation, and submission logic.
+ * - For creators, connects to the user's wallet (via MetaMask/Core Wallet), ensures the correct Avalanche Fuji network,
+ *   checks contract existence, and interacts with the smart contract to register the creator on-chain.
+ * - For fans, displays a message indicating that fan registration is coming soon.
+ * - Provides feedback to the user during the registration process, including loading states and transaction status.
+ * - Redirects already registered creators to their profile page.
+ * - Uses React hooks for state management and ethers.js for blockchain interactions.
+ * - Includes input fields for username, account type, password, confirm password, bio, and avatar URL (for creators).
+ * - Validates required fields and matching passwords.
+ * - Handles errors gracefully and displays appropriate messages.
+ * - Designed to be user-friendly, secure, and maintainable.
+ *
+ * @component
+ */
 const Register: React.FC = () => {
   const [form, setForm] = useState({
     username: "",

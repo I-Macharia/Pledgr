@@ -2,6 +2,13 @@ import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import { getContract, isContractAvailable } from "../utils/contract";
 
+/**
+ * Displays a list of creators by fetching data from a smart contract.
+ * Handles loading and error states while retrieving creator information from the blockchain.
+ *
+ * Returns:
+ *   A React component that renders a loading message, error message, or the list of creators.
+ */
 function CreatorList() {
     const [creators, setCreators] = useState([]);
     const [loading, setLoading] = useState(true);

@@ -1,3 +1,13 @@
+/**
+ * @file Layout.tsx
+ * @description Provides the main layout, header, navigation, and footer for the Pledgr app.
+ * @author Pledgr Team
+ * @created 2025-08-24
+ * @lastModified 2025-08-24
+ * @usage Used to wrap all page components in App.tsx.
+ * @exports Layout (React Functional Component)
+ */
+
 "use client"
 
 import type React from "react"
@@ -8,6 +18,19 @@ interface LayoutProps {
   children: React.ReactNode
 }
 
+/**
+ * Layout component that provides the main structure for the application,
+ * including a header with navigation, a main content area, and a footer.
+ *
+ * - Displays a logo that navigates to the home page when clicked.
+ * - Shows navigation buttons ("Creators", "Profile", "Disconnect") on all pages except the home page.
+ * - Renders child components within the main content area.
+ * - Includes a footer with copyright information.
+ *
+ * @param {LayoutProps} props - The props for the Layout component.
+ * @param {React.ReactNode} props.children - The content to be rendered within the layout.
+ * @returns {JSX.Element} The rendered layout structure.
+ */
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const navigate = useNavigate()
   const location = useLocation()
@@ -41,7 +64,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <main className="main">{children}</main>
 
       <footer className="footer">
-        <p>&copy; 2024 Pledgr. Empowering creators through blockchain.</p>
+        <p>&copy; 2025 Pledgr. Empowering creators through blockchain.</p>
       </footer>
     </div>
   )

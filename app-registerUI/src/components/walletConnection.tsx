@@ -6,6 +6,17 @@ import "../styles/walletConnection.css"
 import { useWallet } from "../hooks/useWallet"
 import { useNavigate } from "react-router-dom"
 
+/**
+ * React component for handling Core Wallet connection and login flow.
+ *
+ * - If the user is not connected, displays a welcome message, wallet connection button, and feature highlights.
+ * - If the user is connected, shows wallet address, signature, and a button to proceed to registration.
+ * - Displays error messages if wallet connection fails.
+ *
+ * Utilizes `useWallet` for wallet state and actions, and `useNavigate` for navigation.
+ *
+ * @component
+ */
 const LoginWithCoreWallet: React.FC = () => {
   const { walletAddress, signature, error, connectWallet } = useWallet()
   const navigate = useNavigate()

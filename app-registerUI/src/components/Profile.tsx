@@ -1,8 +1,29 @@
+/**
+ * @file Profile.tsx
+ * @description Displays and allows editing of the user's profile information.
+ * @author Pledgr Team
+ * @created 2025-08-24
+ * @lastModified 2025-08-24
+ * @usage Used as the /profile route in App.tsx.
+ * @exports Profile (React Functional Component)
+ */
+
 import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import { CREATOR_REGISTRY_ABI, CREATOR_REGISTRY_ADDRESS } from "../creatorRegistryConfig";
 import "../styles/profile.css";
 
+/**
+ * Profile component for displaying and editing the user's profile information.
+ *
+ * - Fetches profile data from a smart contract using ethers.js.
+ * - Allows the user to edit their name, bio, and avatar.
+ * - Handles loading, error, and transaction status states.
+ * - Updates profile data on the blockchain via a contract call.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered profile UI.
+ */
 const Profile: React.FC = () => {
   const [profile, setProfile] = useState<any>(null);
   const [loading, setLoading] = useState(false);
@@ -16,7 +37,9 @@ const Profile: React.FC = () => {
       setLoading(true);
       setError("");
       try {
-        if (!window.ethereum) throw new Error("No wallet found");
+        if (!window.ethereum) {
+          throw new Error("No wallet found");
+        }
         const provider = new ethers.BrowserProvider(window.ethereum);
         const signer = await provider.getSigner();
         const address = await signer.getAddress();
@@ -45,7 +68,9 @@ const Profile: React.FC = () => {
     e.preventDefault();
     setTxStatus("");
     try {
-      if (!window.ethereum) throw new Error("No wallet found");
+      if (!window.ethereum) {
+        throw new Error("No wallet found");
+      }
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
       const contract = new ethers.Contract(

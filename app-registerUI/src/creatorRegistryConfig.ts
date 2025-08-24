@@ -1,4 +1,16 @@
 // Minimal ABI for CreatorRegistry
+/**
+ * ABI for the Creator Registry smart contract.
+ *
+ * This ABI defines the following contract interface:
+ * - `creatorList(uint256)`: Returns the address of a creator at a given index.
+ * - `creators(address)`: Returns detailed information about a creator, including address, name, bio, avatar, active status, total staked, fan count, and creation timestamp.
+ * - `isCreator(address)`: Checks if the given address is registered as a creator.
+ * - `registerCreator(string _name, string _bio, string _avatar)`: Registers a new creator with the provided name, bio, and avatar.
+ * - `updateProfile(string _name, string _bio, string _avatar)`: Updates the profile information of the calling creator.
+ * - `CreatorRegistered`: Event emitted when a creator is registered.
+ * - `CreatorUpdated`: Event emitted when a creator's profile is updated.
+ */
 export const CREATOR_REGISTRY_ABI = [
   {
     "type": "function",

@@ -1,3 +1,12 @@
+/*
+ * @file profile.css
+ * @description Styles for the profile editing form, including input fields, layout, and responsive design.
+ * @author Pledgr Team
+ * @created 2025-08-24
+ * @lastModified 2025-08-24
+ * @usage Imported in Profile.tsx and any component rendering user profile forms.
+ */
+
 .profile-container {
   padding: 32px;
   max-width: 400px;
