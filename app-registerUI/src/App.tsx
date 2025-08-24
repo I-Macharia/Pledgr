@@ -1,51 +1,46 @@
-/**
- * file App.tsx
- * description Root component for the Pledgr frontend. Sets up routing and layout for all pages.
- * author Pledgr Team
- * usage Imported in main.tsx as the main application entry point.
- * exports App (React Functional Component)
- */
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { WagmiProvider } from 'wagmi';
+import { config } from '@/config/web3';
+import { Web3Provider } from '@/providers/Web3Provider';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
+import Index from "./pages/Index";
+import CreatorDashboard from "./pages/CreatorDashboard";
+import NotFound from "./pages/NotFound";
 
-import { Routes, Route } from "react-router-dom"
-import "./App.css"
-import Layout from "./components/Layout"
-import Register from "./components/register"
-import LoginWithCoreWallet from "./components/walletConnection"
-import CreatorsList from "./components/CreatorsList"
-import Profile from "./components/Profile"
-import Home from "./components/Home"
-import UserProfile from "./components/UserProfile"
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 3,
+      staleTime: 5 * 60 * 1000, // 5 minutes
+    },
+  },
+});
 
-/**
- * The main application component that sets up the layout and routing for the app.
- *
- * returns The root JSX element containing the layout and route definitions.
- *
- * Routes:
- * - `/`: Renders the `Home` component (landing page).
- * - `/register`: Renders the `Register` component.
- * - `/creators`: Renders the `CreatorsList` component.
- * - `/profile`: Renders the `Profile` component.
- * - `/user-profile`: Renders the `UserProfile` component.
- * - `/login`: Renders the `LoginWithCoreWallet` component.
- */
-function App() {
-  const FAQ = require("./components/FAQ").default
-  return (
-    <Layout>
-      <div className="app-fullscreen-container">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/creators" element={<CreatorsList />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/user-profile" element={<UserProfile />} />
-          <Route path="/login" element={<LoginWithCoreWallet />} />
-          <Route path="/faq" element={<FAQ />} />
-        </Routes>
-      </div>
-    </Layout>
-  )
-}
+const App = () => (
+  <ErrorBoundary>
+    <QueryClientProvider client={queryClient}>
+      <WagmiProvider config={config}>
+        <Web3Provider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/dashboard" element={<CreatorDashboard />} />
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </BrowserRouter>
+          </TooltipProvider>
+        </Web3Provider>
+      </WagmiProvider>
+    </QueryClientProvider>
+  </ErrorBoundary>
+);
 
-export default App
+export default App;

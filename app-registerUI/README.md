@@ -1,101 +1,73 @@
-# Pledgr Frontend
+# Welcome to your Lovable project
 
-React frontend for the Pledgr app with TypeScript and Vite.
+## Project info
 
-## Getting Started
+**URL**: https://lovable.dev/projects/4fd1e230-128a-4355-931c-8ff8acf9c187
 
-### Prerequisites
+## How can I edit this code?
 
-- [Node.js](https://nodejs.org/)
-- [pnpm](https://pnpm.io/)
+There are several ways of editing your application.
 
-### Installation
+**Use Lovable**
+
+Simply visit the [Lovable Project](https://lovable.dev/projects/4fd1e230-128a-4355-931c-8ff8acf9c187) and start prompting.
+
+Changes made via Lovable will be committed automatically to this repo.
+
+**Use your preferred IDE**
+
+If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+
+The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+
+Follow these steps:
 
 ```sh
-pnpm install
+# Step 1: Clone the repository using the project's Git URL.
+git clone <YOUR_GIT_URL>
+
+# Step 2: Navigate to the project directory.
+cd <YOUR_PROJECT_NAME>
+
+# Step 3: Install the necessary dependencies.
+npm i
+
+# Step 4: Start the development server with auto-reloading and an instant preview.
+npm run dev
 ```
 
-### Development
-Start the development server with hot-reloading:
-```sh
-pnpm dev
-```
+**Edit a file directly in GitHub**
 
-### Build
-Build for production:
-```sh
-pnpm build
-```
+- Navigate to the desired file(s).
+- Click the "Edit" button (pencil icon) at the top right of the file view.
+- Make your changes and commit the changes.
 
-### Preview
-Preview the production build locally:
-```sh
-pnpm preview
-```
+**Use GitHub Codespaces**
 
-### Linting
-Run ESLint to check code quality:
-```sh
-pnpm lint
-```
+- Navigate to the main page of your repository.
+- Click on the "Code" button (green button) near the top right.
+- Select the "Codespaces" tab.
+- Click on "New codespace" to launch a new Codespace environment.
+- Edit files directly within the Codespace and commit and push your changes once you're done.
 
-## Architecture guidelines
+## What technologies are used for this project?
 
-### 1. Modular Structure
-- Keep components, page/screen components, hooks, services, and types in separate directories/files.
-- Separate UI components from business logic and data fetching.
+This project is built with:
 
-### 2. Type safety
-- Avoid using `any` type.
-- Create interfaces/types for custom objects, component props, and API responses.
-- Use TypeScript strict mode for better type checking.
+- Vite
+- TypeScript
+- React
+- shadcn-ui
+- Tailwind CSS
 
-### 3. State management
-- Contexts - Use [createContext](https://react.dev/reference/react/createContext) to create sharable state across components.
-- Context providers should be set up in your root `App` component.
-- You can use a [helper useContext util](https://github.com/shhtarknet/mist-app/blob/main/app/src/lib/useCore.tsx#L12-L22) to have type safe access to context that should always be available.
+## How can I deploy this project?
 
-### 4. Other guidelines
-- Error handling - For promises add catch and have the error show the context. Use Error Boundaries for component errors.
-- Documentation - Write docs for functions when necessary, usually function name should describe the coded functionality.
-- DRY - Don't repeat yourself, wrote more than 2 lines same lines of code the second time? Write a reusable util function or custom hook for it.
+Simply open [Lovable](https://lovable.dev/projects/4fd1e230-128a-4355-931c-8ff8acf9c187) and click on Share -> Publish.
 
-## Project Structure
+## Can I connect a custom domain to my Lovable project?
 
-```
-src/ - App source
-  ∟ main.tsx - Main entry point
-  ∟ App.tsx - Root component
-  ∟ components/ - Reusable UI components
-  ∟ pages/ - Page/Screen based components
-  ∟ services/ - API services and external integrations
-  ∟ utils/ - Utility functions and helpers
-  ∟ types.ts - Global TypeScript types and interfaces
+Yes, you can!
 
-dist/ - Build output (after build)
-public/ - Static assets
-```
+To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
-### Contributing
-With your first PR, Add Yourself as a Contributor.
-Open package.json.
-Add your name (optionally contact and a link) to the contributors array.
-Example:
-```js
-{
-	"contributors": [
-		// other contributors...
-		"Your Name <your@email.com> (https://yourwebsite.com)"
-	]
-}
-```
-Commit your change and open a pull request.
-
-### Guidelines
-Use conventional commits.
-Write clear, concise code and documentation.
-Open an issue or discussion for major changes.
-Follow React best practices and hooks patterns.
-
-### License
-UNLICENSED – see package.json for details.
+Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
