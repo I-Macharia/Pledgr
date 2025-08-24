@@ -29,6 +29,9 @@
 
   Responsive Typography:
     - Adjusts base font size for screens narrower than 768px for mobile friendliness.
+
+  Fullscreen Layout:
+    - Styles for a responsive fullscreen layout for all app pages.
 */
 * {
   margin: 0;
@@ -56,6 +59,29 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+.app-fullscreen-container {
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+
+  .app-fullscreen-container {
+    padding: 0;
+    width: 100vw;
+    min-height: 100vh;
+  }
 }
 
 /* Scrollbar styling */
@@ -111,12 +137,5 @@ select:focus {
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-/* Responsive typography */
-@media (max-width: 768px) {
-  body {
-    font-size: 14px;
   }
 }

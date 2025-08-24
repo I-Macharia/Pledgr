@@ -18,7 +18,7 @@ import { useNavigate } from "react-router-dom"
  * @component
  */
 const LoginWithCoreWallet: React.FC = () => {
-  const { walletAddress, signature, error, connectWallet } = useWallet()
+  const { walletAddress, signature, error, connectWallet, disconnectWallet } = useWallet()
   const navigate = useNavigate()
 
   return (
@@ -69,6 +69,16 @@ const LoginWithCoreWallet: React.FC = () => {
 
           <button className="wallet-register-button" onClick={() => navigate("/register")}>
             🚀 Get Started - Register Now
+          </button>
+          <button
+            className="wallet-disconnect-button"
+            onClick={() => {
+              disconnectWallet()
+              navigate("/")
+            }}
+            style={{ marginTop: "1rem" }}
+          >
+            🔌 Disconnect Wallet
           </button>
         </div>
       )}

@@ -136,7 +136,21 @@ const CreatorsList: React.FC = () => {
   }, []);
 
   return (
-    <div className="creators-list-container">
+    <div className="creators-list-container pledgr-landing">
+      <section className="pledgr-summary">
+        <h2>🌟 Discover Creators</h2>
+        <p>
+          Explore all registered creators on Pledgr. Stake AVAX to support your favorites, unlock exclusive perks, and join a thriving community.
+        </p>
+      </section>
+      <section className="pledgr-features">
+        <h2>Key Features</h2>
+        <ul>
+          <li><strong>Creator Profiles:</strong> View bios, avatars, and analytics</li>
+          <li><strong>Staking:</strong> Support creators and earn rewards</li>
+          <li><strong>Community:</strong> Connect with top creators and fans</li>
+        </ul>
+      </section>
       <h2>All Creators</h2>
       {loading && <p>Loading creators...</p>}
       {error && <p className="creators-list-error">{error}</p>}

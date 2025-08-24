@@ -36,22 +36,25 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const isHomePage = location.pathname === "/"
 
   return (
-    <div className="layout">
+    <div className="layout pledgr-landing">
       <header className="header">
         <div className="header-content">
           <div className="logo" onClick={() => navigate("/")}>
-            <span className="logo-text">Pledgr</span>
+            <span className="logo-text">🚀 Pledgr</span>
           </div>
 
           {!isHomePage && (
             <nav className="nav">
-              <button className="nav-button" onClick={() => navigate("/creators")}>
+              <button className="nav-button" onClick={() => navigate("/creators")}> 
                 Creators
               </button>
-              <button className="nav-button" onClick={() => navigate("/profile")}>
+              <button className="nav-button" onClick={() => navigate("/profile")}> 
                 Profile
               </button>
-              <button className="nav-button secondary" onClick={() => navigate("/")}>
+              <button className="nav-button" onClick={() => navigate("/user-profile")}> 
+                User Profile
+              </button>
+              <button className="nav-button secondary" onClick={() => navigate("/")}> 
                 Disconnect
               </button>
             </nav>
@@ -61,8 +64,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
       <main className="main">{children}</main>
 
-      <footer className="footer">
-        <p>&copy; 2025 Pledgr. Empowering creators through blockchain.</p>
+      <footer className="footer pledgr-footer">
+        <p>&copy; 2025 Pledgr. Empowering creators through blockchain.<br />Built with ❤️ by the Pledgr team for the Avalanche ecosystem</p>
       </footer>
     </div>
   )

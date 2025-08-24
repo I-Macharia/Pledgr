@@ -46,6 +46,20 @@ export function useWallet() {
     }
   };
 
+  // Function to disconnect the wallet
+  const disconnectWallet = () => {
+    setWalletAddress(null);
+    setSignature(null);
+    setError(null);
+    // Optionally clear localStorage/sessionStorage if used
+  };
+
   // Return the wallet state and connect function for use in components
-  return { walletAddress, signature, error, connectWallet };
+  return {
+    walletAddress,
+    signature,
+    error,
+    connectWallet,
+    disconnectWallet, // <-- export this
+  };
 }

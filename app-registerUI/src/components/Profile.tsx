@@ -2,8 +2,8 @@
  * file Profile.tsx
  * description Displays and allows editing of the user's profile information.
  * author Pledgr Team
- * usage Used as the /profile route in App.tsx.
- * exports Profile (React Functional Component)
+ * @usage Used as the /profile route in App.tsx.
+ * @exports Profile (React Functional Component)
  */
 
 import React, { useEffect, useState } from "react";
@@ -19,8 +19,8 @@ import "../styles/profile.css";
  * - Handles loading, error, and transaction status states.
  * - Updates profile data on the blockchain via a contract call.
  *
- * @component
- * @returns {JSX.Element} The rendered profile UI.
+ * component
+ * returns {JSX.Element} The rendered profile UI.
  */
 const Profile: React.FC = () => {
   const [profile, setProfile] = useState<any>(null);

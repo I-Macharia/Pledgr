@@ -48,6 +48,7 @@ Before you begin, ensure you have:
 - [pnpm](https://pnpm.io/) package manager
 - [Foundry](https://book.getfoundry.sh/getting-started/installation) toolkit
 - [Core Wallet](https://core.app/) or MetaMask with Avalanche network
+- **Infura API Key** (for Avalanche Fuji testnet and mainnet RPC access) – [Sign up at Infura](https://infura.io/) and create a project to get your key
 
 ## 🚀 Quick Start
 
@@ -73,7 +74,7 @@ pnpm install
 
 ### 3. Set Up Environment
 
-Create `.env` files in both root and frontend directories:
+modify `.env.example` file in frontend `app-registerUI` directory:
 
 **Root `.env`:**
 ```bash
