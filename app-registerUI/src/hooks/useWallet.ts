@@ -13,36 +13,49 @@ export function useWallet() {
   // Function to connect to the user's wallet and request a signature
   const connectWallet = async () => {
     try {
-      // Check if the Core Wallet extension is available
+      // Detect Core Wallet or MetaMask
       if (!window.ethereum) {
-        setError("Core Wallet not found. Please install the extension.");
+        setError("No wallet found. Please install Core Wallet or MetaMask and refresh the page.");
         return;
       }
-      // Create a new provider using the injected ethereum object
+      // Create provider
       const provider = new BrowserProvider(window.ethereum);
-
-      // Request account access from the user
+      // Request account access
       await provider.send("eth_requestAccounts", []);
-
-      // Get the signer (the user's wallet)
+      // Network switching to Fuji testnet
+      const { chainId } = await provider.getNetwork();
+      if (Number(chainId) !== 43113) {
+        try {
+          await window.ethereum.request({
+            method: "wallet_switchEthereumChain",
+            params: [{ chainId: "0xa869" }], // Fuji testnet
+          });
+        } catch (switchErr: any) {
+          setError("Please switch your wallet to Avalanche Fuji testnet (43113) and try again.");
+          return;
+        }
+      }
+      // Get signer and address
       const signer = await provider.getSigner();
-
-      // Get the wallet address
       const address = await signer.getAddress();
-
-      // Create a message for the user to sign
+      // Sign message
       const message = `Sign in with Core Wallet: ${address}`;
-
-      // Ask the user to sign the message
-      const signedMessage = await signer.signMessage(message);
-
-      // Update state with the wallet address and signature
+      let signedMessage = "";
+      try {
+        signedMessage = await signer.signMessage(message);
+      } catch (signErr: any) {
+        setError("Signature request was rejected. Please approve the signature to continue.");
+        return;
+      }
       setWalletAddress(address);
       setSignature(signedMessage);
       setError(null);
     } catch (err: any) {
-      // Handle errors and display a message to the user
-      setError(err.message || "Something went wrong");
+      if (err.message && err.message.includes("user rejected")) {
+        setError("Wallet connection was rejected. Please approve the connection request.");
+      } else {
+        setError(err.message || "Wallet connection failed. Please try again.");
+      }
     }
   };
 

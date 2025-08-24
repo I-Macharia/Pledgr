@@ -184,8 +184,8 @@ export const CREATOR_REGISTRY_ABI = [
   }
 ];
 
-// Replace with your deployed contract address
-export const CREATOR_REGISTRY_ADDRESS = "0x74e384f2aF3dD6B570F2E2AafA00E8dE24B6b2be";
+// Use env variable if available, fallback to hardcoded
+export const CREATOR_REGISTRY_ADDRESS = import.meta.env.VITE_CONTRACT_ADDRESS || "0x74e384f2aF3dD6B570F2E2AafA00E8dE24B6b2be";
 
 // Network configuration
 export const SUPPORTED_NETWORKS = {

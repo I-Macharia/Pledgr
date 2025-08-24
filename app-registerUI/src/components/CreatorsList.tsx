@@ -37,42 +37,20 @@ const CreatorsList: React.FC = () => {
   const [creators, setCreators] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  // Basic in-memory cache for creators
+  const creatorsCache: { data: any[] | null, timestamp: number } = (window as any).creatorsCache || { data: null, timestamp: 0 };
 
   useEffect(() => {
-    // const fetchFromGraph = async () => {
-    //   try {
-    //     const query = `{
-    //       creators(first: 1000) {
-    //         id
-    //         name
-    //         bio
-    //         avatar
-    //         fanCount
-    //         totalStaked
-    //       }
-    //     }`;
-    //     const res = await fetch(GRAPHQL_ENDPOINT, {
-    //       method: "POST",
-    //       headers: { "Content-Type": "application/json" },
-    //       body: JSON.stringify({ query }),
-    //     });
-    //     const { data } = await res.json();
-    //     if (data && data.creators) {
-    //       return data.creators;
-    //     }
-    //     throw new Error("No data from The Graph");
-    //   } catch (err) {
-    //     throw err;
-    //   }
-    // };
-
-    const fetchFromContract = async (provider: any) => {
-      const contract = new ethers.Contract(
+    let contract: any = null;
+    let provider: any = null;
+    let eventListener: any = null;
+    const fetchFromContract = async (prov: any) => {
+      contract = new ethers.Contract(
         CREATOR_REGISTRY_ADDRESS,
         CREATOR_REGISTRY_ABI,
-        provider
+        prov
       );
-      console.log("Using contract address:", CREATOR_REGISTRY_ADDRESS); // Debug
+      // ...existing code...
       const creatorCountBN = await contract.creatorList.length;
       const creatorCount = Number(creatorCountBN);
       const addresses = [];
@@ -80,59 +58,86 @@ const CreatorsList: React.FC = () => {
         addresses.push(await contract.creatorList(i));
       }
       return await Promise.all(
-              addresses.map(async (addr) => {
-                const c = await contract.creators(addr);
-                return { ...c };
-              })
-            );
+        addresses.map(async (addr) => {
+          const c = await contract.creators(addr);
+          return {
+            ...c,
+            avatar: c.avatar && /^https?:\/\/.+\.(jpg|jpeg|png|gif|svg)$/i.test(c.avatar)
+              ? c.avatar
+              : "/default-avatar.png",
+            name: c.name || "Unnamed",
+            bio: c.bio || "No bio provided.",
+            fanCount: c.fanCount || 0,
+            totalStaked: c.totalStaked || 0,
+          };
+        })
+      );
     };
-
     const fetchCreators = async () => {
       setLoading(true);
       setError("");
-      try {
-        // // 1. Try The Graph
-        // if (GRAPHQL_ENDPOINT && !GRAPHQL_ENDPOINT.includes("YOUR_SUBGRAPH_NAME")) {
-        //   try {
-        //     const graphCreators = await fetchFromGraph();
-        //     if (graphCreators && graphCreators.length > 0) {
-        //       setCreators(graphCreators);
-        //       setLoading(false);
-        //       return;
-        //     }
-        //   } catch (err) {
-        //     console.warn("The Graph fetch failed.", err);
-        //   }
-        // }
-        // 2. Try Infura
-        if (INFURA_RPC && !INFURA_RPC.includes("YOUR_INFURA_PROJECT_ID")) {
-          try {
-            const infuraProvider = new ethers.JsonRpcProvider(INFURA_RPC);
-            const infuraCreators = await fetchFromContract(infuraProvider);
+      if (creatorsCache.data && Date.now() - creatorsCache.timestamp < 5 * 60 * 1000) {
+        setCreators(creatorsCache.data);
+        setLoading(false);
+        return;
+      }
+      let attempts = 0;
+      const maxAttempts = 3;
+      const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
+      while (attempts < maxAttempts) {
+        try {
+          if (INFURA_RPC && !INFURA_RPC.includes("YOUR_INFURA_PROJECT_ID")) {
+            provider = new ethers.JsonRpcProvider(INFURA_RPC);
+            const infuraCreators = await fetchFromContract(provider);
             if (infuraCreators && infuraCreators.length > 0) {
               setCreators(infuraCreators);
+              (window as any).creatorsCache = { data: infuraCreators, timestamp: Date.now() };
               setLoading(false);
               return;
             }
-          } catch (err) {
-            console.warn("Infura fetch failed, falling back to window.ethereum.", err);
           }
+          if (window.ethereum) {
+            provider = new ethers.BrowserProvider(window.ethereum);
+            const browserCreators = await fetchFromContract(provider);
+            setCreators(browserCreators);
+            (window as any).creatorsCache = { data: browserCreators, timestamp: Date.now() };
+            setLoading(false);
+            return;
+          } else {
+            throw new Error("No wallet or RPC provider found");
+          }
+        } catch (err: any) {
+          attempts++;
+          if (attempts < maxAttempts) {
+            setError(`Failed to fetch creators. Retrying... (${attempts}/${maxAttempts})`);
+            await delay(1200 * attempts);
+          } else {
+            setError(err.message || "Failed to fetch creators");
+            setCreators([]);
+          }
+        } finally {
+          setLoading(false);
         }
-        // 3. Fallback to window.ethereum
-        if (window.ethereum) {
-          const browserProvider = new ethers.BrowserProvider(window.ethereum);
-          const browserCreators = await fetchFromContract(browserProvider);
-          setCreators(browserCreators);
-        } else {
-          throw new Error("No wallet or RPC provider found");
-        }
-        setCreators([]); // If The Graph fails, show empty
-      } catch (err: any) {
-        setError(err.message || "Failed to fetch creators");
       }
-      setLoading(false);
     };
     fetchCreators();
+    // Listen for contract events to refresh creators list
+    setTimeout(() => {
+      if (provider && contract) {
+        eventListener = contract.on("CreatorRegistered", () => {
+          fetchCreators();
+        });
+        eventListener = contract.on("CreatorUpdated", () => {
+          fetchCreators();
+        });
+      }
+    }, 1000);
+    return () => {
+      if (contract && eventListener) {
+        contract.off("CreatorRegistered", eventListener);
+        contract.off("CreatorUpdated", eventListener);
+      }
+    };
   }, []);
 
   return (
@@ -152,7 +157,17 @@ const CreatorsList: React.FC = () => {
         </ul>
       </section>
       <h2>All Creators</h2>
-      {loading && <p>Loading creators...</p>}
+      {loading && (
+        <div className="creators-list-loading">
+          {[...Array(4)].map((_, i) => (
+            <div key={i} className="creator-card skeleton">
+              <div className="creator-avatar skeleton-avatar" />
+              <div className="skeleton-text" />
+              <div className="skeleton-text" />
+            </div>
+          ))}
+        </div>
+      )}
       {error && <p className="creators-list-error">{error}</p>}
       {!loading && !error && creators.length === 0 && (
         <p className="creators-list-empty">No creators found. Be the first to register!</p>
@@ -160,7 +175,12 @@ const CreatorsList: React.FC = () => {
       <div className="creators-list-grid">
         {creators.map((c, i) => (
           <div key={i} className="creator-card">
-            <img src={c.avatar} alt={c.name} className="creator-avatar" />
+            <img
+              src={c.avatar || "/default-avatar.png"}
+              alt={c.name}
+              className="creator-avatar"
+              onError={e => (e.currentTarget.src = "/default-avatar.png")}
+            />
             <h3 className="creator-name">{c.name}</h3>
             <p className="creator-bio">{c.bio}</p>
             <p className="creator-meta">Fans: {c.fanCount} | Staked: {c.totalStaked}</p>

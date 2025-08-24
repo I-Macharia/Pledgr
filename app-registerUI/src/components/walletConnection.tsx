@@ -27,13 +27,16 @@ const LoginWithCoreWallet: React.FC = () => {
         <div className="wallet-login-section">
           <div className="wallet-hero">
             <h1>Welcome to Pledgr</h1>
-            <p>Connect your Core Wallet to start supporting your favorite creators and building your community.</p>
+            <p>Connect your Core Wallet or MetaMask to start supporting your favorite creators and building your community.</p>
+            <ul className="wallet-guidance">
+              <li>✅ Make sure you have <a href="https://core.app/" target="_blank" rel="noopener noreferrer">Core Wallet</a> or <a href="https://metamask.io/" target="_blank" rel="noopener noreferrer">MetaMask</a> installed.</li>
+              <li>✅ Switch your wallet to Avalanche Fuji testnet (43113).</li>
+              <li>✅ Approve connection and signature requests when prompted.</li>
+            </ul>
           </div>
-
           <button onClick={connectWallet} className="wallet-login-button">
-            🔗 Connect Core Wallet
+            🔗 Connect Wallet
           </button>
-
           <div className="features">
             <div className="feature">
               <div className="feature-icon">👥</div>
@@ -55,7 +58,6 @@ const LoginWithCoreWallet: React.FC = () => {
       ) : (
         <div className="wallet-info-section">
           <h2>🎉 Connection Successful!</h2>
-
           <div className="wallet-details">
             <div className="wallet-address">
               <strong>Wallet Address:</strong>
@@ -66,8 +68,7 @@ const LoginWithCoreWallet: React.FC = () => {
               <div className="signature-value">{signature}</div>
             </div>
           </div>
-
-          <button className="wallet-register-button" onClick={() => navigate("/register")}>
+          <button className="wallet-register-button" onClick={() => navigate("/register")}> 
             🚀 Get Started - Register Now
           </button>
           <button
@@ -82,10 +83,23 @@ const LoginWithCoreWallet: React.FC = () => {
           </button>
         </div>
       )}
-
       {error && (
         <div className="wallet-error-message">
           <strong>Connection Error:</strong> {error}
+          {error.includes("No wallet found") && (
+            <div className="wallet-install-guidance">
+              <p>
+                Please install <a href="https://core.app/" target="_blank" rel="noopener noreferrer">Core Wallet</a> or <a href="https://metamask.io/" target="_blank" rel="noopener noreferrer">MetaMask</a> and refresh the page.
+              </p>
+            </div>
+          )}
+          {error.includes("Fuji testnet") && (
+            <div className="wallet-network-guidance">
+              <p>
+                <strong>How to switch network:</strong> Open your wallet and select Avalanche Fuji testnet (chainId 43113).
+              </p>
+            </div>
+          )}
         </div>
       )}
     </div>

@@ -30,6 +30,7 @@ import UserProfile from "./components/UserProfile"
  * - `/login`: Renders the `LoginWithCoreWallet` component.
  */
 function App() {
+  const FAQ = require("./components/FAQ").default
   return (
     <Layout>
       <div className="app-fullscreen-container">
@@ -40,6 +41,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/user-profile" element={<UserProfile />} />
           <Route path="/login" element={<LoginWithCoreWallet />} />
+          <Route path="/faq" element={<FAQ />} />
         </Routes>
       </div>
     </Layout>
