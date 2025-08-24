@@ -1,11 +1,9 @@
 /**
- * @file CreatorsList.tsx
- * @description Displays a list of all registered creators on the platform.
- * @author Pledgr Team
- * @created 2025-08-24
- * @lastModified 2025-08-24
- * @usage Used as the /creators route in App.tsx.
- * @exports CreatorsList (React Functional Component)
+ * file CreatorsList.tsx
+ * description Displays a list of all registered creators on the platform.
+ * author Pledgr Team
+ * usage Used as the /creators route in App.tsx.
+ * exports CreatorsList (React Functional Component)
  */
 
 import React, { useEffect, useState } from "react";

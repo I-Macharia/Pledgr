@@ -1,11 +1,9 @@
 /**
- * @file Layout.tsx
- * @description Provides the main layout, header, navigation, and footer for the Pledgr app.
- * @author Pledgr Team
- * @created 2025-08-24
- * @lastModified 2025-08-24
- * @usage Used to wrap all page components in App.tsx.
- * @exports Layout (React Functional Component)
+ * file Layout.tsx
+ * description Provides the main layout, header, navigation, and footer for the Pledgr app.
+ * author Pledgr Team
+ * usage Used to wrap all page components in App.tsx.
+ * exports Layout (React Functional Component)
  */
 
 "use client"

@@ -1,11 +1,9 @@
 /**
- * @file Profile.tsx
- * @description Displays and allows editing of the user's profile information.
- * @author Pledgr Team
- * @created 2025-08-24
- * @lastModified 2025-08-24
- * @usage Used as the /profile route in App.tsx.
- * @exports Profile (React Functional Component)
+ * file Profile.tsx
+ * description Displays and allows editing of the user's profile information.
+ * author Pledgr Team
+ * usage Used as the /profile route in App.tsx.
+ * exports Profile (React Functional Component)
  */
 
 import React, { useEffect, useState } from "react";
