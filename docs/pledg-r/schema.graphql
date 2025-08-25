@@ -1,0 +1,29 @@
+type CreatorRegistered @entity(immutable: true) {
+  id: Bytes!
+  creator: Bytes! # address
+  name: String! # string
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type CreatorUpdated @entity(immutable: true) {
+  id: Bytes!
+  creator: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Creator @entity {
+  id: ID!
+  name: String!
+  bio: String
+  avatar: String
+  fanCount: BigInt
+  totalStaked: BigInt
+}
+
+type Query {
+  creators(first: Int, skip: Int, orderBy: Creator_orderBy, orderDirection: OrderDirection, where: Creator_filter): [Creator!]!
+}
