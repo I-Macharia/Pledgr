@@ -42,11 +42,53 @@ jobs:
         with:
           version: ${{ env.PNPM_VERSION }}
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+      - name: Detect and install dependencies
+        shell: bash
+        run: |
+          # Detect preferred package manager
+          if [ -f ".package-manager" ]; then
+            PM=$(cat .package-manager)
+            echo "Using preferred package manager: $PM"
+          elif [ -f "pnpm-lock.yaml" ]; then
+            PM="pnpm"
+            echo "Found pnpm-lock.yaml, using pnpm"
+          elif [ -f "package-lock.json" ]; then
+            PM="npm"
+            echo "Found package-lock.json, using npm"
+          else
+            PM="pnpm"
+            echo "No lockfile found, defaulting to pnpm"
+          fi
+          
+          # Install dependencies
+          case $PM in
+            "pnpm")
+              echo "Installing with pnpm..."
+              if [ -f "pnpm-lock.yaml" ]; then
+                pnpm install --frozen-lockfile || pnpm install
+              else
+                pnpm install
+              fi
+              ;;
+            "npm")
+              echo "Installing with npm..."
+              if [ -f "package-lock.json" ]; then
+                npm ci || npm install
+              else
+                npm install
+              fi
+              ;;
+            *)
+              echo "Unknown package manager: $PM, falling back to npm"
+              npm install
+              ;;
+          esac
 
       - name: Build application
-        run: pnpm build
+        shell: bash
+        run: |
+          PM=$([ -f ".package-manager" ] && cat .package-manager || echo "pnpm")
+          $PM build
         env:
           VITE_CHAIN_ID: 43113
           VITE_RPC_URL: https://api.avax-test.network/ext/bc/C/rpc
