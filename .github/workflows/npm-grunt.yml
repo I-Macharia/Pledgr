@@ -27,4 +27,4 @@ jobs:
         pnpm install
         grunt
 
-      working-directory: app-registerUI
+      
