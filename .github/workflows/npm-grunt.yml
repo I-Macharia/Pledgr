@@ -24,7 +24,7 @@ jobs:
 
     - name: Build
       run: |
-        pnpm install
+        npm install
         grunt
 
       
